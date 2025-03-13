@@ -1,0 +1,19 @@
+#navbar-main {
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: aquamarine;
+}
+
+#navbar-main ul {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+#navbar-main ul li {
+  list-style: none;
+  margin: 10px;
+  font-size: large;
+}
