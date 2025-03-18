@@ -8,3 +8,40 @@
   width: 100%;
   padding: 12px;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(255, 96, 22);
+  align-items: center;
+  padding: 12px;
+  color: #ffffff;
+  margin-bottom: 50px;
+}
+.navbar h1 {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.navbar ul li {
+  list-style: none;
+}
+
+.navFooter {
+  display: flex;
+  justify-content: space-around;
+  background-color: forestgreen;
+  align-items: center;
+  padding: 12px;
+  color: #ffffff;
+  margin-bottom: 50px;
+  position: absolute;
+  width: 100%;
+  bottom: -50px;
+}
+
+table tr td {
+  border: 1px solid black;
+
+  padding: 10px;
+}
