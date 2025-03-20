@@ -1,12 +1,20 @@
 import React, { useState } from 'react'
 import TodoPage from './pages/TodoPage'
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import { useReducer } from 'react';
+import { reducer } from './reducer/reducer';
 
 const App = () => {
+  const [state, dispatch] = useReducer(reducer, []);// useReducer hook
+  console.log(state, "hello")
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch({ type: 'ADD_TODO', payload: { title, description } })// dispatch action
+    localStorage.setItem("todos", JSON.stringify([...state]));
     console.log("Title :", title);
     console.log("Description :", description);
     setTitle('');
@@ -16,13 +24,7 @@ const App = () => {
   return (
     <div>
       {/* <h1>Header</h1> */}
-      <nav className="navbar">
-        <h1>Todo App</h1>
-        <ul>
-          <li>ToDO</li>
-        </ul>
-        <h2>Theme</h2>
-      </nav>
+      <Navbar />
       <form style={{ display: 'flex', justifyContent: 'center', marginBottom: '50px' }} onSubmit={handleSubmit}>
         <div style={{ backgroundColor: 'blue', padding: '20px', width: "30%", }}>
           <input className="inputBox" type="text" name="title" placeholder="Enter title" value={title || ""} onChange={(e) => setTitle(e.target.value)} /><br /> <br />
@@ -53,9 +55,8 @@ const App = () => {
           </tbody>
         </table>
       </section>
-      <footer className='navFooter'>
-        <h1>footer</h1>
-      </footer>
+      {/* footer section */}
+      <Footer />
     </div>
   )
 }
