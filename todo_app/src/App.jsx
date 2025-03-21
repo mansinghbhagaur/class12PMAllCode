@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TodoPage from './pages/TodoPage'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -6,18 +6,21 @@ import { useReducer } from 'react';
 import { reducer } from './reducer/reducer';
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, []);// useReducer hook
-  console.log(state, "hello")
-  const [title, setTitle] = useState('')
+  const initialState = JSON.parse(localStorage.getItem('todos')) || [];
+  const [state, dispatch] = useReducer(reducer, initialState);// useReducer hook
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+
+  console.log(state, "hello");
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(state));
+  }, [state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: 'ADD_TODO', payload: { title, description } })// dispatch action
-    localStorage.setItem("todos", JSON.stringify([...state]));
-    console.log("Title :", title);
-    console.log("Description :", description);
-    setTitle('');
+    dispatch({ type: 'ADD_TODO', payload: { title, description } });
+    setTitle('')
     setDescription('');
   }
 
@@ -45,13 +48,22 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td align='center'>1</td>
-              <td align='center'>Test Project</td>
-              <td align='center'>Test Project More description</td>
-              <td align='center'><button style={{ backgroundColor: 'black', borderRadius: '10px', color: '#ffffff', padding: '10px' }}>Edit</button></td>
-              <td align='center'><button style={{ backgroundColor: 'black', borderRadius: '10px', color: '#ffffff', padding: '10px' }}>Delete</button></td>
-            </tr>
+
+            {
+              state?.map((item) => (
+
+                <tr key={item.id}>
+                  <td align='center'>{item.id}</td>
+                  <td align='center'>{item.title}</td>
+                  <td align='center'>{item.description}</td>
+                  <td align='center'><button style={{ backgroundColor: 'black', borderRadius: '10px', color: '#ffffff', padding: '10px' }}>Edit</button></td>
+                  <td align='center'><button style={{ backgroundColor: 'black', borderRadius: '10px', color: '#ffffff', padding: '10px' }}>Delete</button></td>
+                </tr>
+
+              ))
+            }
+
+
           </tbody>
         </table>
       </section>
