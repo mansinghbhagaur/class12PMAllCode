@@ -10,6 +10,9 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);// useReducer hook
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [selectedEditRow, setSelectedEditRow] = useState(null);
+
+  console.log(selectedEditRow, 'editrow')
 
   console.log(state, "hello");
 
@@ -19,10 +22,22 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: 'ADD_TODO', payload: { title, description } });
+    if (selectedEditRow) {
+      dispatch({ type: 'EDIT_TODO', payload: { id: selectedEditRow.id, title, description } });
+    } else {
+      dispatch({ type: 'ADD_TODO', payload: { title, description } });
+    }
     setTitle('')
     setDescription('');
+    setSelectedEditRow(null);
   }
+
+  useEffect(() => {
+    if (selectedEditRow) {
+      setTitle(selectedEditRow.title);
+      setDescription(selectedEditRow.description);
+    }
+  }, [selectedEditRow]);
 
   return (
     <div>
@@ -56,8 +71,8 @@ const App = () => {
                   <td align='center'>{item.id}</td>
                   <td align='center'>{item.title}</td>
                   <td align='center'>{item.description}</td>
-                  <td align='center'><button style={{ backgroundColor: 'black', borderRadius: '10px', color: '#ffffff', padding: '10px' }}>Edit</button></td>
-                  <td align='center'><button style={{ backgroundColor: 'black', borderRadius: '10px', color: '#ffffff', padding: '10px' }}>Delete</button></td>
+                  <td align='center'><button style={{ backgroundColor: 'black', borderRadius: '10px', color: '#ffffff', padding: '10px' }} onClick={() => setSelectedEditRow(item)}>Edit</button></td>
+                  <td align='center'><button style={{ backgroundColor: 'black', borderRadius: '10px', color: '#ffffff', padding: '10px' }} onClick={() => dispatch({ type: 'REMOVE_TODO', payload: item })}>Delete</button></td>
                 </tr>
 
               ))
