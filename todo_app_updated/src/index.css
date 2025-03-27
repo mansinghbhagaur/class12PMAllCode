@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar-main {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  justify-content: space-around;
+  align-items: center;
+  background-color: aqua;
+  padding: 10px;
+  color: #878383;
+}
+
+.navbar-main ul {
+  display: flex;
+  /* background-color: red; */
+  gap: 15px;
+  /* padding: 20px; */
+  align-items: center;
+
+  font-size: 24px;
+}
+
+.navbar-main ul li {
+  list-style: none;
+}
+.navbar-main .icons {
+  font-size: 20px;
+}
+
+/* footer section design */
+.footer-main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 25px 0;
+  background-color: rgb(241, 231, 231);
+}
+
+.footer-main .links-footer {
+  list-style: none;
+  padding: 5px;
+}
+
+.footer-main .links-footer li {
+  padding: 2px 0;
+}
+
+.footer-main .social-icons-footer {
+  padding: 5px;
+}
+
+.footer-main .social-icons-footer h2,
+div {
+  padding: 3px 0;
+}
+
+/* table component style  */
+.table-component {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  min-height: 10vh;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+.table-component,
+th,
+td {
+  /* border: 2px solid black; */
+  padding: 10px;
+  text-align: center;
+}
